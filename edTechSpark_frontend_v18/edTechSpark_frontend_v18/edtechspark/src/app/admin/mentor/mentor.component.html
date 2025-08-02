@@ -1,0 +1,56 @@
+<div class="col-sm-10">
+    <form #form="ngForm" [formGroup]="mentorForm" (ngSubmit)="saveData()">
+        <h2 *ngIf="mentorForm.controls['id'].value==0">Create Mentor</h2>
+        <h2 *ngIf="mentorForm.controls['id'].value!=0">Edit Mentor</h2>
+        <hr>      
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" class="form-control" name="name" formControlName="name" />
+            <div *ngIf="mentorForm.controls['name'].errors && (form.submitted || mentorForm.controls['name'].dirty)"
+                class="text-danger">
+                <span [hidden]="!mentorForm.controls['name']?.hasError('required')">Please Enter Name</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Email</label>
+            <input type="text" class="form-control" name="email" formControlName="email" />
+            <div *ngIf="mentorForm.controls['email'].errors && (form.submitted || mentorForm.controls['email'].dirty)"
+                class="text-danger">
+                <span [hidden]="!mentorForm.controls['email']?.hasError('required')">Please Enter Email</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Title</label>
+            <input type="text" class="form-control" name="title" formControlName="title" />
+            <div *ngIf="mentorForm.controls['title'].errors && (form.submitted || mentorForm.controls['title'].dirty)"
+                class="text-danger">
+                <span [hidden]="!mentorForm.controls['title']?.hasError('required')">Please Enter Title</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Biography</label>
+            <textarea class="form-control" name="biography" formControlName="biography" rows="7"></textarea>
+            <div *ngIf="mentorForm.controls['biography'].errors && (form.submitted || mentorForm.controls['biography'].dirty)"
+                class="text-danger">
+                <span [hidden]="!mentorForm.controls['biography']?.hasError('required')">Please Enter Biography</span>
+            </div>
+        </div>    
+        <div class="form-group">
+            <label class="control-label">Skills</label>
+            <input class="form-control" name="skills" formControlName="skills" />
+            <div *ngIf="mentorForm.controls['skills'].errors && (form.submitted || mentorForm.controls['skills'].dirty)"
+                class="text-danger">
+                <span [hidden]="!mentorForm.controls['skills']?.hasError('required')">Please Enter Skills</span>
+            </div>
+        </div>   
+        <div class="form-group">
+            <input type="file" #file placeholder="Choose file" (change)="changeFile(file.files)" style="display:none;">
+            <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+            <label *ngIf="fileToUpload!=undefined"> &nbsp;{{fileToUpload.name}}</label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            &nbsp;<a [routerLink]="['/admin/mentors']" class="btn btn-warning">Cancel</a>
+        </div>
+    </form>
+</div>

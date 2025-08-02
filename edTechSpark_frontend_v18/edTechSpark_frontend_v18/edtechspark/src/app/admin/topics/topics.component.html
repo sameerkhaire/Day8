@@ -1,0 +1,28 @@
+<h2>Topic List</h2>
+<hr>
+<a [routerLink]="['/admin/topic']" class="btn btn-primary">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of topics">
+            <td>{{item.id}}</td>
+            <td>{{item.topicName}}</td>
+            <td>{{item.courseName}}</td>
+            <td>{{item.isActive==true?'Active':'InActive'}}</td>          
+            <td>
+                <a [routerLink]="['/admin/topic',item.id]" class="btn btn-success">Edit</a>
+                &nbsp;<a [routerLink]="['/admin/topic',item.id,'lessons']" class="btn btn-success">Lessons</a>
+                &nbsp; <a (click)="deleteTopic(item.id)" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

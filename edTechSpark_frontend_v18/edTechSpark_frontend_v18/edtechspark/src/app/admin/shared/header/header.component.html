@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/']">
+      <img src="assets/images/logo.png" style="height:40px" class="d-inline-block mb-1" />&nbsp;&nbsp; <span class="d-inline-block">edTech</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+      <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item active">
+          <a class="nav-link text-dark" [routerLink]="['/admin']">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" [routerLink]="['/admin/courses']">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" [routerLink]="['/admin/topics']">Topics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" [routerLink]="['/admin/mentors']">Mentors</a>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+      <ul class="navbar-nav" *ngIf="user!=null">
+        <li class="nav-item">
+          <span class="nav-link text-dark">Welcome : {{user.name}}</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="javascript:void(0)" (click)="logOut()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

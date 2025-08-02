@@ -1,0 +1,53 @@
+<div class="col-sm-6">
+    <h2>User SignUp</h2>
+    <hr />
+    <form #form="ngForm" [formGroup]="userForm" (ngSubmit)="userSignUp()">
+      <div class="form-group">
+        <label class="control-label">Name</label>
+        <input type="text" class="form-control" name="name" formControlName="name" />
+        <div *ngIf="userForm.controls['name'].errors && (form.submitted || userForm.controls['name'].dirty)"
+             class="text-danger">
+          <span [hidden]="!userForm.controls['name']?.hasError('required')">Please Enter Name</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Email</label>
+        <input type="text" class="form-control" name="email" formControlName="email" />
+        <div *ngIf="userForm.controls['email'].errors && (form.submitted || userForm.controls['email'].dirty)"
+             class="text-danger">
+          <span [hidden]="!userForm.controls['email']?.hasError('required')">Please Enter Email</span>
+          <span [hidden]="!(!userForm.controls['email']?.hasError('required') && userForm.controls['email']?.hasError('email'))">
+            Please
+            Enter Correct Email
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Password</label>
+        <input type="password" class="form-control" name="password" formControlName="password" />
+        <div *ngIf="userForm.controls['password'].errors && (form.submitted || userForm.controls['password'].dirty)"
+             class="text-danger">
+          <span [hidden]="!userForm.controls['password']?.hasError('required')">Please Enter Password</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Confirm Password</label>
+        <input type="password" class="form-control" name="confirmPassword" formControlName="confirmPassword" />
+        <div *ngIf="userForm.controls['confirmPassword'].errors && (form.submitted || userForm.controls['confirmPassword'].dirty)"
+             class="text-danger">
+          <span [hidden]="!userForm.controls['confirmPassword']?.hasError('required')">Please Confirm Your Password</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Contact</label>
+        <input type="text" class="form-control" name="phoneNumber" formControlName="phoneNumber" />
+        <div *ngIf="userForm.controls['phoneNumber'].errors && (form.submitted || userForm.controls['phoneNumber'].dirty)"
+             class="text-danger">
+          <span [hidden]="!userForm.controls['phoneNumber']?.hasError('pattern')">Please Enter phone Number</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Sign Up" class="btn btn-primary" />
+      </div>
+    </form>
+  </div>

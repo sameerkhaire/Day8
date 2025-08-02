@@ -1,0 +1,74 @@
+<app-header></app-header>
+<div style="border-bottom: 1px solid #e0dada; background: #e7eaed">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="pt-5 pb-4">
+            <h1>{{course.name}}</h1>
+            <p class="pb-4">{{course.summary}}</p>
+            <p><a [routerLink]="[course.url]" class="btn btn-primary">START LEARNING NOW</a></p>
+          </div>
+        </div>
+        <div class="col-sm-4 pt-5 pb-2">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" [src]="course.demoUrl | safe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container pt-4">
+    <div class="row">
+      <div class="col-sm-8">
+        <h3>Description</h3>
+        <div [innerHTML]="course.description"></div>
+        <h3 *ngIf="course.courseTopics.length>0">Course Lessons</h3>
+        <div class="accordion mb-4" id="accordionLessons">
+          <div class="card" *ngFor="let topic of course.courseTopics">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">
+                  {{topic.topicName}}
+                </button>
+              </h5>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordionLessons">
+              <div class="card-body">
+                <div class="list_lessons">
+                  <ul>
+                    <li *ngFor="let lesson of topic.lessons">
+                      <a><i class="bi bi-play-circle"></i> {{lesson.lessonName}}</a><span>{{lesson.duration}}</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+      <div class="col-sm-4">
+        <div class="text-center card p-4">
+          <h2>{{course.unitPrice | currency:'INR'}}</h2>
+          <p class="mt-2">
+            <a href="javascript:void(0)" (click)="AddToCart(course.id,course.name,course.unitPrice,1,course.imageUrl)" class="btn btn-outline-primary btn-block">Add To Cart</a>
+          </p>
+          <p>
+            <a href="javascript:void(0)" (click)="BuyNow(course.id,course.name,course.unitPrice,1,course.imageUrl)" class="btn btn-info btn-block">BUY NOW</a>
+          </p>
+        </div>
+        <div class="card mt-4 p-3 mb-4">
+          <h3>About The Mentor</h3>
+          <p style="text-align:justify;font-size:14px;text-rendering:optimizeLegibility"></p>
+          <p style="text-align:justify">{{course.mentor.biography}}<br></p>
+          <div class="text-center">
+            <img class="rounded-circle" style="width:150px;height:150px;text-align:center"
+              [src]="course.mentor.imageUrl">
+            <h4>{{course.mentor.name}}</h4>
+            <div>{{course.mentor.title}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>

@@ -1,0 +1,95 @@
+<div class="col-sm-10">
+    <form #form="ngForm" [formGroup]="courseForm" (ngSubmit)="saveData()">
+        <h2 *ngIf="courseForm.controls['id'].value==0">Create Course</h2>
+        <h2 *ngIf="courseForm.controls['id'].value!=0">Edit Course</h2>
+        <hr>
+        <div class="form-group">
+            <label class="control-label">Category</label>
+            <select class="form-control" name="categoryId" formControlName="categoryId">
+                <option [value]="''">-Select-</option>
+                <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
+            </select>
+            <div *ngIf="courseForm.controls['categoryId'].errors && (form.submitted || courseForm.controls['categoryId'].dirty)"
+                class="text-danger">
+                <span [hidden]="!courseForm.controls['categoryId']?.hasError('required')">Please Select Category</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" class="form-control" name="name" formControlName="name" />
+            <div *ngIf="courseForm.controls['name'].errors && (form.submitted || courseForm.controls['name'].dirty)"
+                class="text-danger">
+                <span [hidden]="!courseForm.controls['name']?.hasError('required')">Please Enter Name</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Url</label>
+            <input type="text" class="form-control" name="url" formControlName="url" />
+            <div *ngIf="courseForm.controls['url'].errors && (form.submitted || courseForm.controls['url'].dirty)"
+                class="text-danger">
+                <span [hidden]="!courseForm.controls['url']?.hasError('required')">Please Enter Url</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Summary</label>
+            <textarea class="form-control" name="summary" formControlName="summary" rows="7"></textarea>
+            <div *ngIf="courseForm.controls['summary'].errors && (form.submitted || courseForm.controls['summary'].dirty)"
+                class="text-danger">
+                <span [hidden]="!courseForm.controls['summary'].hasError('required')">Please Enter Summary</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Description</label>
+            <div  name="description" formControlName="description"></div>
+            <div *ngIf="courseForm.controls['description'].errors && (form.submitted || courseForm.controls['description'].dirty)"
+                class="text-danger">
+                <span [hidden]="!courseForm.controls['description']?.hasError('required')">Please Enter Description</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Difficulty Type</label>
+            <select class="form-control" name="difficultyType" formControlName="difficultyType">
+                <option [value]="''">-Select-</option>
+                <option value="1">Beginners</option>
+                <option value="2">Intermediate</option>
+                <option value="2">Advanced</option>
+            </select>
+            <div *ngIf="courseForm.controls['difficultyType'].errors && (form.submitted || courseForm.controls['difficultyType'].dirty)"
+                class="text-danger">
+                <span [hidden]="!courseForm.controls['difficultyType']?.hasError('required')">Please Select Difficulty
+                    Type</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Mentor</label>
+            <select class="form-control" name="mentorId" formControlName="mentorId">
+                <option [value]="''">-Select-</option>
+                <option *ngFor="let mentor of mentors" [value]="mentor.id">
+                    {{mentor.name}}
+                </option>
+
+            </select>
+            <div *ngIf="courseForm.controls['mentorId'].errors && (form.submitted || courseForm.controls['mentorId'].dirty)"
+                class="text-danger">
+                <span [hidden]="!courseForm.controls['mentorId']?.hasError('required')">Select Mentor</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Unit Price</label>
+            <input type="number" class="form-control" name="unitPrice" formControlName="unitPrice" />
+            <div *ngIf="courseForm.controls['unitPrice'].errors && (form.submitted || courseForm.controls['unitPrice'].dirty)"
+                class="text-danger">
+                <span [hidden]="!courseForm.controls['unitPrice']?.hasError('required')">Please Enter Unit Price</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="file" #file placeholder="Choose file" (change)="changeFile(file.files)" style="display:none;">
+            <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+            <label *ngIf="fileToUpload!=undefined"> &nbsp;{{fileToUpload.name}}</label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            &nbsp;<a [routerLink]="['/admin/courses']" class="btn btn-warning">Cancel</a>
+        </div>
+    </form>
+</div>

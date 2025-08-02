@@ -1,0 +1,31 @@
+<h2>Mentor List</h2>
+<hr>
+<a [routerLink]="['/admin/mentor']" class="btn btn-primary">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Metor</th>
+            <th>Email</th>
+            <th>Title</th>
+            <th>Biography</th>
+            <th class="w-25">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of mentors">
+            <td>
+                <img [src]="item.imageUrl" height="100"/>
+                <div>{{item.name}}</div>
+            </td>
+            <td>{{item.email}}</td>
+            <td>{{item.title}}</td>
+            <td class="text-justify">{{item.biography}}</td>
+            <td>
+                <a [routerLink]="['/admin/mentor',item.id]" class="btn btn-success">Edit</a>
+                &nbsp;<a (click)="deleteMentor(item.id)" class="btn btn-danger">Delete</a>
+            </td>
+
+        </tr>
+    </tbody>
+</table>

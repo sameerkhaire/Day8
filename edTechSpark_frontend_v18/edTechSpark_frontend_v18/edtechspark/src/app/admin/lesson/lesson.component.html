@@ -1,0 +1,69 @@
+<div class="col-sm-10">
+  <form #form="ngForm" [formGroup]="lessonForm" (ngSubmit)="saveData()">
+    <h2 *ngIf="lessonForm.controls['id'].value==0">Create Lesson</h2>
+    <h2 *ngIf="lessonForm.controls['id'].value!=0">Edit Lesson</h2>
+    <hr>
+    <div class="form-group">
+      <label class="control-label">Lesson Name</label>
+      <input type="text" class="form-control" name="lessonName" formControlName="lessonName" />
+      <div *ngIf="lessonForm.controls['lessonName'].errors && (form.submitted || lessonForm.controls['lessonName'].dirty)"
+           class="text-danger">
+        <span [hidden]="!lessonForm.controls['lessonName']?.hasError('required')">Please Enter Lesson Name</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Sequence</label>
+      <input type="number" class="form-control" name="sequence" formControlName="sequence" />
+      <div *ngIf="lessonForm.controls['sequence'].errors && (form.submitted || lessonForm.controls['sequence'].dirty)"
+           class="text-danger">
+        <span [hidden]="!lessonForm.controls['sequence']?.hasError('required')">Please Enter Sequence</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Video Link</label>
+      <input type="text" class="form-control" name="videoPath" formControlName="videoPath" />
+      <div *ngIf="lessonForm.controls['videoPath'].errors && (form.submitted || lessonForm.controls['videoPath'].dirty)"
+           class="text-danger">
+        <span [hidden]="!lessonForm.controls['videoPath']?.hasError('required')">Please Enter Video Link</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Content Path</label>
+      <input type="text" class="form-control" name="contentPath" formControlName="contentPath" />
+    </div>
+    <div class="form-group">
+      <label class="control-label">Duration</label>
+      <input type="text" class="form-control" name="duration" formControlName="duration" />
+      <div *ngIf="lessonForm.controls['duration'].errors && (form.submitted || lessonForm.controls['duration'].dirty)"
+           class="text-danger">
+        <span [hidden]="!lessonForm.controls['duration']?.hasError('required')">Please Enter Duration</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Status</label>
+      <select class="form-control" name="isActive" formControlName="isActive">
+        <option value="true">Active</option>
+        <option value="false">InActive</option>
+      </select>
+      <div *ngIf="lessonForm.controls['isActive'].errors && (form.submitted || lessonForm.controls['isActive'].dirty)"
+           class="text-danger">
+        <span [hidden]="!lessonForm.controls['isActive']?.hasError('required')">Please Select Status</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Preview</label>
+      <select class="form-control" name="isPreview" formControlName="isPreview">
+        <option value="true">Preview</option>
+        <option value="false">Not Preview</option>
+      </select>
+      <div *ngIf="lessonForm.controls['isPreview'].errors && (form.submitted || lessonForm.controls['isPreview'].dirty)"
+           class="text-danger">
+        <span [hidden]="!lessonForm.controls['isPreview']?.hasError('required')">Please Preview Status</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Save" class="btn btn-primary" /> &nbsp;&nbsp;
+      <a [routerLink]="['/admin/topic',this.topicId,'lessons']" class="btn btn-warning">Cancel</a>
+    </div>
+  </form>
+</div>
