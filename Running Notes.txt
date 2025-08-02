@@ -1,0 +1,387 @@
+---TB613----
+
+---Lab requirement---
+VSCode 
+NodeJs LTS
+Visual Studio 2022 Community Edition
+
+---Day 1---
+Javascript is a dynamic scripting language
+
+var i = 10;
+i = 'pradeep shet';
+i = true;
+
+function add(x,y){
+  return x+y;
+}
+
+add(1,'test'); //1test
+add(10);  //NaN
+add();	  //NaN
+
+undefined & null
+
+Hoisting - It scans the code & move the declaration on the top
+var j;
+console.log(j); //undefined
+//
+//
+//
+= 100;
+
+var a = 'test';
+var b = 10;
+var c =  a + b - 1 ; //test101
+
+EcmaScript
+HTML - W3C
+JS - ES
+
+IE11 - ES5  class
+Chrome, Edge, Mozilla - ES6+   class
+
+TypeScript
+- Programming language developed by Microsoft
+- Superset of JAvascript
+- Compiles your code & convert into Traditional JS according to ES std
+- Supports OOPS 
+- free & Open source
+
+NodeJs
+- Open-source & cross-platform 
+- JavaScript runtime environment
+- Tools within nodejs NPM (Node Package Manager)
+
+NPM
+- Download or share js/css packages from public repository 
+- Resolve inter dependencies
+> npm install typescript -g
+
+var - Function or global scope, hoisting supported
+let - blocked scope, hoisting not supported
+
+class, inheritance, overloading, union, destructuring, spread operator, module
+
+---Day 2---
+Add ts configuration file
+>tsc -init
+
+Angular 
+- It is a binding framework
+- It believes in writing declarative statements rather than imperative statements
+- Open source
+
+Angular CLI
+-A powerful tool to create, build, compile and serve Angular App
+
+>npm install @angular/cli@19.1.17 -g
+
+Creating project using cli
+>ng new <projectName> --no-standalone --skip-install
+>cd <projectName>
+>npm install
+>ng serve           It will compile, build, spin up live development server, run project
+
+Decorators
+	Class Decorators
+	@NgModule
+	@Component
+	@Directive
+	@Pipe
+	@Injectable
+	
+	Method Decorator
+	@HostListener()
+	
+	Field DEcorator
+	@Input()
+
+Component = Class + Html Template + Metadata
+
+Data Binding
+-A mechanism for binding data values to HTML elements and turning user activities into actions
+Types of Binding
+ Interpolation   	Component => DOM   {{}}
+ Property Binding 	Component => DOM	[]
+ Event Binding   	DOM => Component	()
+ Two way binding	Component <=> DOM	[(ngModel)]  Import FormsModule
+ 
+Directives
+- Used to extend the power of existing Html markup
+- Change the appearance or behavior of a DOM element
+Types of Directive
+ Component - A directive with a template
+ Structural Directive - Alter the DOM by adding or removing html element  *ngIf, *ngFor
+ Attribute Directive - Alter the appearance or behavior of an existing element [ngClass]
+ Custom directive
+ >ng g d <directiveName>
+ 
+ ElementRef
+ 
+---Day 3---
+
+Bootstrap
+- A framework used for desigining responsive ui
+ >npm install bootstrap --save
+ 
+ container, form-control, form-select, btn btn-primary, row, col, table
+ 
+Pipe
+- Used to tranform the bound properties before displaying
+currency, date, uppercase, lowercase, number, percent
+- Creating a custom pipe
+ >ng g p <pipeName>
+ 
+Routing
+-Based on requested url, load the page/component
+
+Steps for implementinmg ROuting
+- Import a module RouterModule
+- Define the routes 
+  const routes: Routes = [
+  {path:'home', component: FirstComponent},
+  ]
+- Map the RouterModule with routes
+  RouterModule.forRoot(routes)
+- Add a placeholder to load components in app.component.html
+  <router-outlet></router-outlet>
+- Add the navbar and link to navigate
+   <a class="nav-link" routerLinkActive="highlight" [routerLink]="['databinding']">Data Binding</a>
+             
+ActivatedRoute
+- Inject this class to read the url information   
+	 this.activatedRoute.params.subscribe(data=>{
+      this.Id = data['id'];
+    })
+
+Router
+- Inject this class to navigate from one component to another
+   this.router.navigate(['dir', this.product.productId], {
+      queryParams: {
+        city: 'mumbai', country: 'india'
+      }
+    });
+	
+---Day 4---
+Data Sharing
+@Input() - Passing the data from parent component to child. It is done by exposing a property from child
+
+@Output() - Passing thee data from child component to parent. It is done by exposing a event in child
+
+@ViewChild() - Taking the conttrol of child component/dom element in parent component
+
+Angular Forms
+Dsigining of form with input element
+
+Two approaches
+- Template Driven
+- Model Driven (Reactive Form)
+
+Control State
+-pristine => dirty
+-untouched => touched
+-valid <=> invalid
+
+Steps for implementing Tempate driven forms
+-Design the form & provide template refrence of type "ngForm"
+	 <form #frm="ngForm"></form>
+- Add input controls & provide "name" & "ngModel" attribute
+  <input type="text" class="form-control" name="productId" [(ngModel)]="product.productId" />
+- Add ngSubmit event & pass the template reference obj to SaveProduct() method
+   <form #frm="ngForm" (ngSubmit)="saveProduct(frm)">
+- Add validation in input element using html 5 validation attribute
+  required, pattern, min, max, emailAddress, minlength, maxlength
+- To show error message use below logic
+   <div class="text-danger" *ngIf="frm.controls['productCode']?.errors">
+		Product Code is mandatory
+	</div>
+
+Steps for implementing Model driven forms
+- Import a module "ReactiveFormsModule"
+- Design the model in the ts using FormBuilder class & FormGroup class
+    this.frm = this.fb.group({
+      productId: this.fb.control('')
+	  })
+- Add validations in the ts code itself
+	productCode: this.fb.control('', [Validators.required]),
+- Map the FormGroup & Formcontrols in html template
+   <form [formGroup]="frm" (ngSubmit)="saveProduct()">
+            <div class="form-group">
+                <label>Product Id</label>
+                <input type="text" class="form-control" formControlName="productId" />
+            </div>
+	</form>
+- Add ngSubmit event & call SaveProduct() method
+   <form [formGroup]="frm" (ngSubmit)="saveProduct()">
+- To show error message use below logic
+   <div class="text-danger" *ngIf="frm.controls['productCode']?.errors">
+		Product Code is mandatory
+	</div>
+	
+---Day 5---
+
+Services
+- Used to share common functionalities across components
+- It creates a singleton object & shared across the component
+ CREATE => PROVIDE => INJECT => USE
+
+Creating a service
+> ng g s <serviceName>
+
+
+Reactivex
+-A api for asychronous programming with observable streams
+-Rx.Net, RxJava, Rxjs, RxScala
+-RxJs 
+ Jascript operator that helps to publish, transform, consume the stream data
+ 
+ Observable
+ A funtion that returns stream of data to an observer over time. 
+ It can rturn data from 0 to infinity
+ 
+ Observer
+ It consume that data produced by observable & notfiies the subscriber
+ It has 3 callback methods
+ next - sucess message
+ error - error message 
+ complete - indication for end of stream
+ 
+ Operator
+ It takes observable as input & return another observable as output after manipulation
+ map, filter, of, take, retry
+ 
+ 
+ CORS
+ - Cross Origin Resource Sharing
+ 
+---Day 6---
+ Implemented CRUD operation with WebAPI
+ 
+ subject 
+ - A special type of observable that can produce & allow to subscribe
+ 
+Lazy loading
+- Creating separate js chunk of module/component and download it on demand
+- This helps in reducing the size of initial bundle
+>ng g m <moduleName> --route=adminhome --module=app
+
+loadChildren()
+loadComponent()
+
+Standalone components
+- A component without having module support
+ > ng g c <componentName> --standalone
+ 
+
+Content-Projection
+-Projecting the content between the tags of component inside the child component
+ <ng-content></ng-content>
+ @ContentChild() - to access to content of projected element
+---Day 7---
+
+Signal
+- Reactive way of managing state without RxJs
+- It is always 1 way binding
+
+Unit testing
+- Testing a smallest unit of code in an isolated manner
+
+Jasmine framework- unit test framework, (*.spec.ts)
+
+Karma- Unit test runner
+
+function add(x,y){
+	return x+y;
+}
+
+//test suite
+describe('Test add method',() => {
+
+	//test spec
+	it('Pass x>0,y>0 return result>0', ()=> {
+		//Arrangement
+		let a=1, b=2;
+		
+		//Act
+		let result = add(a,b);
+		
+		//Assert
+		expect(result).toEqual(3);  //matchers
+	})
+	
+	it('Pass x<0,y<0 return result<0', ()=> {
+		//Arrangement
+		let a=-1, b=-2;
+		
+		//Act
+		let result = add(a,b);
+		
+		//Assert
+		expect(result).toEqual(-3);  //matchers
+	})
+	
+})
+
+Setup & Teardown methods
+beforeEach()
+beforeAll()
+
+afterEach()
+afterAll()
+
+---Day 8---
+
+public module
+ - login
+ - signup
+ - cart
+ - courses
+ - /shared
+    -header
+	-footer
+	-layout
+
+admin module
+- course
+- courses
+- mentor
+- mentors
+- topic
+- topics
+- lesson
+- lessons
+- /shared
+    -header
+	-footer
+	-layout
+
+
+user module
+- order-history
+- /shared
+    -header
+	-footer
+	-layout
+
+services
+- auth.service
+- course.service
+- catalog.service
+
+shared modules
+- custom directives
+- custom pipes
+
+
+Angular Guards
+- Used to protect the route from un authorized access
+- It helps to conrol the navigation
+- Types of guards
+  CanActivate- Trigger when route is activated
+  canDeActivate - Triggers when route is about to leave
+  canActivateChild - Set on parent component but is applied for the children route
+  canMatch - Applied on lazyloading component/modules. Similar to canActivate
+  
+
+https://edtechsparkapi.azurewebsites.net/swagger/index.html
